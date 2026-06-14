@@ -74,7 +74,10 @@ CREATE TABLE Bookings (
     CONSTRAINT chk_booking_total_cost CHECK (total_cost >= 0),
     
     -- Write your check constraint to restrict 'payment_status' values
-    CONSTRAINT chk_booking_payment_status CHECK (payment_status IN ('Confirmed', 'Pending'))
+    CONSTRAINT chk_booking_payment_status CHECK (payment_status IN ('Confirmed', 'Pending')),
+
+    -- Composite Unique Constraint (Instruction given for the ER Diagram)
+    CONSTRAINT uq_match_seat UNIQUE (user_id, match_id, seat_number)
 );
 
 
