@@ -44,10 +44,10 @@ CREATE TABLE Matches (
     CONSTRAINT pk_matches PRIMARY KEY (match_id),
     
     -- Write your check constraint to prevent negative ticket prices
-    CONSTRAINT chk_price_matches CHECK (base_ticket_price >= 0),
+    CONSTRAINT chk_match_price CHECK (base_ticket_price >= 0),
     
     -- Write your check constraint to restrict 'match_status' values
-    CONSTRAINT chk_match_status_matches CHECK (match_status IN ('Available', 'Selling Fast', 'Sold Out'))
+    CONSTRAINT chk_match_status CHECK (match_status IN ('Available', 'Selling Fast', 'Sold Out'))
 );
 
 -- =========================================================================
@@ -65,16 +65,16 @@ CREATE TABLE Bookings (
     CONSTRAINT pk_bookings PRIMARY KEY (booking_id),
     
     -- Write your Foreign Key constraint linking 'user_id' to the Users table
-    CONSTRAINT fk_users_bookings FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    CONSTRAINT fk_bookings_users FOREIGN KEY (user_id) REFERENCES Users(user_id),
     
     -- Write your Foreign Key constraint linking 'match_id' to the Matches table
-    CONSTRAINT fk_matches_bookings FOREIGN KEY (match_id) REFERENCES Matches(match_id),
+    CONSTRAINT fk_bookings_matches FOREIGN KEY (match_id) REFERENCES Matches(match_id),
     
     -- Write your check constraint to ensure 'total_cost' is non-negative
-    CONSTRAINT chk_total_cost_bookings CHECK (total_cost >= 0),
+    CONSTRAINT chk_booking_total_cost CHECK (total_cost >= 0),
     
     -- Write your check constraint to restrict 'payment_status' values
-    CONSTRAINT chk_payment_status_bookings CHECK (payment_status IN ('Confirmed', 'Pending'))
+    CONSTRAINT chk_booking_payment_status CHECK (payment_status IN ('Confirmed', 'Pending'))
 );
 
 
